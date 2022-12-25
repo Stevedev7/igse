@@ -1,13 +1,5 @@
 GET http://localhost:8000 HTTP/1.1
 ###
-
-POST http://localhost:8000/user/login HTTP/1.1
-Content-Type: application/json
-
-{
-     "username": "RogueJonin"
-}
-###
 POST http://localhost:8000/user/register HTTP/1.1
 Content-Type: application/json
 
@@ -34,7 +26,7 @@ Content-Type: application/json
 
 GET http://localhost:8000/user/ HTTP/1.1
 
-###
+### Login route
 POST http://localhost:8000/user/login HTTP/1.1
 Content-Type: application/json
 
@@ -47,3 +39,22 @@ Content-Type: application/json
 ### LogOut User
 
 POST http://localhost:8000/user/logout HTTP/1.1
+
+###
+GET  http://localhost:8000/igse HTTP/1.1
+
+
+###
+GET http://localhost:8000/user/reading HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2E4NDllYTg5YTc3NWQwMzk3YzZiM2EiLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzE5NzY5MDAsImV4cCI6MTY3MTk3ODcwMH0.I3vNPAGQndrBgP72ucWuqPRCR4akWEWTmvdLH1b91O8
+
+###
+POST http://localhost:8000/user/reading/new HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2E4NDllYTg5YTc3NWQwMzk3YzZiM2EiLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzE5NzgzNDQsImV4cCI6MTY3MTk4MDE0NH0.7_Qk7yV6N9gLbhAd7-ekWu26FJHr1lTnXfiaIwhPjg4
+Content-Type: application/json
+
+{
+     "dayReading": 100,
+	"nightReading": 200,
+	"gasReading": 800
+}

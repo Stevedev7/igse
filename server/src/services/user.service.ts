@@ -50,11 +50,21 @@ export const setPassword = async (user: UserInterface) => {
 	return await user.hashPassword();
 };
 
+export const addReading = async (
+	userId: Schema.Types.ObjectId,
+	reading: Schema.Types.ObjectId
+) => {
+	const user = await User.findById(userId);
+	user.addReading(reading);
+	return user;
+};
+
 export default {
 	createUser,
 	saveUser,
 	deleteUser,
 	findUser,
 	findUserById,
-	setPassword
+	setPassword,
+	addReading
 };

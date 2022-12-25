@@ -39,10 +39,11 @@ export const postUser = async (
 			return next();
 		}
 
-		next(new Error('User Exists'));
-	} catch (err) {
-		res.status(400).json(err);
-		console.log(err);
+		throw new Error('User Exists');
+	} catch ({ message }) {
+		res.status(400).json({
+			error: message
+		});
 	}
 };
 

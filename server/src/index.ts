@@ -2,17 +2,23 @@ import express, { Application } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import { config } from 'dotenv';
 
 import routes from './routes';
-import userRouter from './routes/user.routes';
+import userRoutes from './routes/user.routes';
+import igseRoutes from './routes/igse.routes';
 
 import { initDB } from './init/db';
+import seed from './init/seed.db';
+
+config();
 
 const PORT = process.env.PORT || 8000;
 
 const app: Application = express();
 
 initDB();
+seed();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('tiny'));
@@ -28,5 +34,8 @@ app.use(
 );
 
 app.use(routes);
-app.use('/user', userRouter);
-app.listen(PORT);
+app.use('/user', userRoutes);
+app.use('/igse', igseRoutes);
+app.listen(PORT, () => {
+	console.log(`Server started at http://localhost:${PORT}`);
+});

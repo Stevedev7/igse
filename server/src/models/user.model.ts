@@ -10,9 +10,11 @@ interface UserInterface extends Document {
 	balance: number;
 	bedrooms: number;
 	isAdmin: boolean;
+	readings: [Schema.Types.ObjectId];
 	comparePassword(password: string): boolean;
 	hashPassword(): Promise<string>;
 	hidePassword(): void;
+	addReading(id: Schema.Types.ObjectId): Schema.Types.ObjectId;
 }
 enum PropertyType {
 	DETACHED = 'detached',
@@ -72,7 +74,8 @@ const UserSchema = new Schema<UserInterface>({
 	},
 	propertyType: {
 		type: String,
-		required: true
+		required: true,
+		enum: PropertyType
 	},
 	address: {
 		firstLine: {
@@ -102,7 +105,13 @@ const UserSchema = new Schema<UserInterface>({
 	isAdmin: {
 		type: Boolean,
 		default: false
-	}
+	},
+	readings: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Reading'
+		}
+	]
 });
 
 UserSchema.methods.comparePassword = async function (password: string) {
@@ -111,7 +120,7 @@ UserSchema.methods.comparePassword = async function (password: string) {
 
 UserSchema.methods.hashPassword = function () {
 	return new Promise((resolve, reject) => {
-		bcrypt.genSalt(15, (err, salt) => {
+		bcrypt.genSalt(10, (err, salt) => {
 			if (err) {
 				return reject(err);
 			}
@@ -124,6 +133,10 @@ UserSchema.methods.hashPassword = function () {
 			});
 		});
 	});
+};
+
+UserSchema.methods.addReading = async function (id: Schema.Types.ObjectId) {
+	await this.readings.push(id);
 };
 
 export default model<UserInterface>('User', UserSchema);
