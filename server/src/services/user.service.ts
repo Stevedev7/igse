@@ -1,10 +1,14 @@
 import { Schema } from 'mongoose';
-import User, {
-	UserInterface,
-	NameInterface,
+import { getVoucher } from '../controllers/voucher.controller';
+import User from '../models/user.model';
+import voucherModel from '../models/voucher.model';
+import UserInterface, {
 	AddressInterface,
+	NameInterface,
 	PropertyType
-} from '../models/user.model';
+} from '../types/User.interface';
+import VoucherInterface from '../types/Voucher.interface';
+import { findVoucher } from './voucher.service';
 
 export const createUser = async ({
 	email,
@@ -13,11 +17,13 @@ export const createUser = async ({
 	balance,
 	bedrooms,
 	address,
-	propertyType
+	propertyType,
+	isAdmin
 }: {
 	name: NameInterface;
 	email: string;
 	password: string;
+	isAdmin?: boolean;
 	balance: number;
 	bedrooms: number;
 	address: AddressInterface;
@@ -30,7 +36,8 @@ export const createUser = async ({
 		balance,
 		bedrooms,
 		address,
-		propertyType
+		propertyType,
+		isAdmin
 	});
 
 export const saveUser = async (user: UserInterface) => await user.save();
@@ -41,7 +48,7 @@ export const deleteUser = async (user: UserInterface) =>
 export const findUser = async (field: string, value: string) =>
 	await User.findOne({ [field]: value }).select('+password');
 
-export const findUserById = async (id: typeof Schema.Types.ObjectId) =>
+export const findUserById = async (id: Schema.Types.ObjectId) =>
 	await User.findById(id);
 
 export const findAllUsers = async () => await User.find({});
@@ -49,6 +56,9 @@ export const findAllUsers = async () => await User.find({});
 export const setPassword = async (user: UserInterface) => {
 	return await user.hashPassword();
 };
+
+export const findUsers = async (field: string, value: string) =>
+	await User.find({ [field]: value }).select('+password');
 
 export const addReading = async (
 	userId: Schema.Types.ObjectId,
@@ -59,6 +69,21 @@ export const addReading = async (
 	return user;
 };
 
+export const useVoucher = async (
+	userId: Schema.Types.ObjectId,
+	code: Pick<VoucherInterface, 'code'>
+) => {
+	const user = await User.findById(userId);
+	user.addVoucher(code);
+	const voucher = await findVoucher(code);
+	await (
+		await voucherModel.findOneAndUpdate({ code }, { $set: { used: true } })
+	).save();
+	await saveUser(user);
+
+	return user;
+};
+
 export default {
 	createUser,
 	saveUser,
@@ -66,5 +91,6 @@ export default {
 	findUser,
 	findUserById,
 	setPassword,
-	addReading
+	addReading,
+	useVoucher
 };

@@ -1,43 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
-
-interface UserInterface extends Document {
-	name: NameInterface;
-	email: string;
-	password: string;
-	propertyType: PropertyType;
-	address: AddressInterface;
-	balance: number;
-	bedrooms: number;
-	isAdmin: boolean;
-	readings: [Schema.Types.ObjectId];
-	comparePassword(password: string): boolean;
-	hashPassword(): Promise<string>;
-	hidePassword(): void;
-	addReading(id: Schema.Types.ObjectId): Schema.Types.ObjectId;
-}
-enum PropertyType {
-	DETACHED = 'detached',
-	SEMI_DETACHED = 'semi-detached',
-	TERRACED = 'terraced',
-	FLAT = 'flat',
-	COTTAGE = 'cottage',
-	BUNGALOW = 'bungalow',
-	MANSION = 'mansion'
-}
-
-interface NameInterface {
-	firstName: string;
-	middleName: string;
-	lastName: string;
-}
-
-interface AddressInterface {
-	firstLine: string;
-	secondLine: string;
-	city: string;
-	postCode: string;
-}
+import UserInterface, { PropertyType } from '../types/User.interface';
+import VoucherInterface from '../types/Voucher.interface';
 
 const UserSchema = new Schema<UserInterface>({
 	email: {
@@ -111,7 +75,8 @@ const UserSchema = new Schema<UserInterface>({
 			type: Schema.Types.ObjectId,
 			ref: 'Reading'
 		}
-	]
+	],
+	vouchers: [{ type: String, ref: 'Voucher' }]
 });
 
 UserSchema.methods.comparePassword = async function (password: string) {
@@ -139,6 +104,10 @@ UserSchema.methods.addReading = async function (id: Schema.Types.ObjectId) {
 	await this.readings.push(id);
 };
 
-export default model<UserInterface>('User', UserSchema);
+UserSchema.methods.addVoucher = async function (
+	code: Pick<VoucherInterface, 'code'>
+) {
+	await this.vouchers.push(code);
+};
 
-export { UserInterface, NameInterface, AddressInterface, PropertyType };
+export default model<UserInterface>('User', UserSchema);

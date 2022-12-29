@@ -1,9 +1,7 @@
 import { Schema } from 'mongoose';
-import Reading, {
-	PaymentStatusType,
-	ReadingInterface
-} from '../models/reading.model';
-import { UserInterface } from '../models/user.model';
+import Reading from '../models/reading.model';
+import { PaymentStatusType } from '../types/Reading.interface';
+import UserInterface from '../types/User.interface';
 import { addReading, saveUser } from './user.service';
 
 export const createReading = async (

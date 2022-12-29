@@ -4,21 +4,20 @@ POST http://localhost:8000/user/register HTTP/1.1
 Content-Type: application/json
 
 {
-     "email": "pinto_steve@yahoo.com",
+     "email": "naruto_uzumaki@gmail.com",
      "password": "password",
-     "confirm": "password",
+     "confirm": "password_",
      "name": {
-        "firstName": "Brian",
-        "middleName": "Steve",
-        "lastName": "Pinto"
+        "firstName": "Naruto",
+        "middleName": "Namikaze",
+        "lastName": "Uzumaki"
      },
      "bedrooms": 6,
-     "propertyType": "flat",
+     "propertyType": "semi-detached",
      "address": {
-          "firstLine": "Flat 3 Jayhouse",
-          "secondLine": "88-90 London Road",
+          "firstLine": "1 Windermere",
           "city": "Leicester",
-          "postCode": "LE20RD"
+          "postCode": "LE27GU"
      }
 }
 
@@ -41,20 +40,43 @@ Content-Type: application/json
 POST http://localhost:8000/user/logout HTTP/1.1
 
 ###
-GET  http://localhost:8000/igse HTTP/1.1
-
-
-###
 GET http://localhost:8000/user/reading HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2E4NDllYTg5YTc3NWQwMzk3YzZiM2EiLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzE5NzY5MDAsImV4cCI6MTY3MTk3ODcwMH0.I3vNPAGQndrBgP72ucWuqPRCR4akWEWTmvdLH1b91O8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2E4YmNkYmFjM2JiNmNkZTYxMzE3ZTAiLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzIwMDI3OTgsImV4cCI6MTY3MjAwNDU5OH0.B1mjgtohDewRJy035F0yq28sQNErmT4LZg4H2440_I8
 
 ###
 POST http://localhost:8000/user/reading/new HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2E4NDllYTg5YTc3NWQwMzk3YzZiM2EiLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzE5NzgzNDQsImV4cCI6MTY3MTk4MDE0NH0.7_Qk7yV6N9gLbhAd7-ekWu26FJHr1lTnXfiaIwhPjg4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2E5ZDFlOWFmNzQwN2YzMDQ3MTNiMTYiLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzIwNzM3MjMsImV4cCI6MTY3MjA3NTUyM30._yafQWUoh7tEDnsZogAvyXzhgqaa-5uPTcT9BMooiG0
 Content-Type: application/json
 
 {
      "dayReading": 100,
-	"nightReading": 200,
-	"gasReading": 800
+	"nightReading": 69,
+	"gasReading": 420
+}
+
+### Open API
+
+GET http://localhost:8000/igse HTTP/1.1
+
+
+### Admin login
+POST http://localhost:8000/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+     "email": "gse@shangrila.gov.un",
+     "password": "gse@energy"
+
+}
+
+###
+GET http://localhost:8000/igse/admin/voucher HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FjODFmZDU1MWY5NzJkMTRkZmM0M2UiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMjQ5ODgwLCJleHAiOjE2NzIyNTE2ODB9.2xWMdZSZRvIc_P-4zB62tj_uUYDYDMI5tcn0tCWATYM
+###
+POST http://localhost:8000/igse/admin/voucher/new HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FjODFmZDU1MWY5NzJkMTRkZmM0M2UiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMjQ5ODgwLCJleHAiOjE2NzIyNTE2ODB9.2xWMdZSZRvIc_P-4zB62tj_uUYDYDMI5tcn0tCWATYM
+Content-Type: application/json
+
+{
+     "code": "ABCDEFGH"
 }

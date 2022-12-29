@@ -1,7 +1,9 @@
 import User from '../models/user.model';
 import Reading from '../models/reading.model';
-import { createUser } from '../services/user.service';
+import Voucher from '../models/voucher.model';
+import { createUser, setPassword } from '../services/user.service';
 import { createReading } from '../services/reading.service';
+import { createVoucher, saveVoucher } from '../services/voucher.service';
 
 const generateRandomNumber = (
 	upperLimit: number,
@@ -29,6 +31,31 @@ const properties = [
 	'bungalow',
 	'mansion'
 ];
+
+const vouchers = new Set([
+	'XTX2GZAD',
+	'NDA7SY2V',
+	'RVA7DZ2D',
+	'DM8LEESR',
+	'1DD33478',
+	'75E1C449',
+	'B0A5AB26',
+	'3EC3D508',
+	'339A9431',
+	'91D88CB4',
+	'388886FB',
+	'B1D371EF',
+	'9FF14719',
+	'AB89D27C',
+	'91DE3E8E',
+	'B4CE430B',
+	'32D10C6E',
+	'446F1E30',
+	'1E1165C7',
+	'72B432BD',
+	'32D10C6E',
+	'B4CE430B'
+]);
 
 const users = [
 	{
@@ -131,24 +158,95 @@ const users = [
 		},
 		bedrooms: generateRandomNumber(1, 10),
 		propertyType: properties[generateRandomNumber(0, 7)]
+	},
+	{
+		email: 'pinto_steve@yahoo.com',
+		password: 'password',
+		confirm: 'password',
+		name: {
+			firstName: 'Brian',
+			middleName: 'Steve',
+			lastName: 'Pinto'
+		},
+		bedrooms: 6,
+		propertyType: 'flat',
+		address: {
+			firstLine: 'Flat 3 Jayhouse',
+			secondLine: '88-90 London Road',
+			city: 'Leicester',
+			postCode: 'LE20RD'
+		}
+	},
+	{
+		email: 'gse@shangrila.gov.un',
+		password: 'gse@energy',
+		confirm: 'gse@energy',
+		name: {
+			firstName: 'GSE Admin',
+			lastName: 'Shangrilla'
+		},
+		bedrooms: 5,
+		propertyType: 'detached',
+		address: {
+			firstLine: '123 University Road',
+			city: 'Leicester',
+			postCode: 'LE23RD'
+		},
+		isAdmin: true,
+		balance: 200
+	},
+	{
+		email: 'test@gmail.com',
+		password: '12345',
+		confirm: '12345',
+		name: {
+			firstName: 'Test',
+			lastName: 'User'
+		},
+		bedrooms: 3,
+		balance: 200,
+		propertyType: 'flat',
+		address: {
+			firstLine: '10 Victoria park road',
+			city: 'Leicester',
+			postCode: 'LE23RD'
+		}
 	}
 ];
 
 const seed = async () => {
+	await Voucher.remove({});
 	await Reading.remove({});
 	await User.remove({});
+	console.log('Seeding initialized.');
 
+	vouchers.forEach(async (voucher) => {
+		const newVoucher = await createVoucher(voucher, 200);
+		await saveVoucher(newVoucher);
+		console.log(`Voucher: ${voucher} added.`);
+	});
 	users.forEach(async (user) => {
 		let nuberOfReadings = generateRandomNumber(0, 5);
-		let newUser = await createUser(user as any);
+		let newUser = await createUser({
+			...user,
+			isAdmin: user.isAdmin
+		} as any);
+		await setPassword(newUser);
 		await newUser.save();
+		console.log(`User: ${newUser.email} saved.`);
 
-		for (let i = 0; i < nuberOfReadings; i++) {
-			let newReading = await createReading(
-				{ ...generateReadings(), customer: newUser._id },
-				newUser
-			);
-			await newReading.save();
+		if (
+			newUser.email !== 'test@gmail.com' &&
+			newUser.email !== 'gse@shangrila.gov.un'
+		) {
+			for (let i = 0; i < nuberOfReadings; i++) {
+				let newReading = await createReading(
+					{ ...generateReadings(), customer: newUser._id },
+					newUser
+				);
+				await newReading.save();
+				console.log(`Reading: ${newReading._id} created.`);
+			}
 		}
 	});
 };

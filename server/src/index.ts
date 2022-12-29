@@ -34,8 +34,15 @@ app.use(
 );
 
 app.use(routes);
+
+//Routes definition
+
+// Routes -> /user/*
 app.use('/user', userRoutes);
+
+// Routes -> /igse/*
 app.use('/igse', igseRoutes);
+
 app.listen(PORT, () => {
 	console.log(`Server started at http://localhost:${PORT}`);
 });

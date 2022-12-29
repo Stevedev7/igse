@@ -4,8 +4,17 @@ import {
 	findAllUsers,
 	findUser,
 	saveUser,
-	setPassword
+	setPassword,
+	useVoucher
 } from '../services/user.service';
+import {
+	createVoucher,
+	findVoucher,
+	saveVoucher
+} from '../services/voucher.service';
+import VoucherInterface from '../types/Voucher.interface';
+import { validateRegistrationInput } from '../validations/user.validation';
+import { validateVoucherRedeemInput } from '../validations/voucher.validation';
 
 export const postUser = async (
 	req: Request,
@@ -17,25 +26,57 @@ export const postUser = async (
 			name,
 			password,
 			email,
-			balance,
 			bedrooms,
 			address,
-			propertyType
+			propertyType,
+			voucher
 		} = req.body;
+
+		const { error } = validateRegistrationInput(req.body);
+
+		if (error) {
+			return res.status(400).json({ error: error.details[0].message });
+		}
 		const user = await findUser('email', email);
 		if (user == null) {
-			const newUser = await createUser({
+			const voucherError = validateVoucherRedeemInput({
+				code: voucher
+			}).error;
+			if (voucherError) {
+				throw new Error(voucherError.details[0].message);
+			}
+			const getVoucher = await findVoucher(voucher);
+
+			if (getVoucher === null) {
+				return res
+					.status(404)
+					.json({ error: 'Enter a valid energy voucher code' });
+			}
+
+			if (getVoucher.used) {
+				return res
+					.status(400)
+					.json({ error: 'Energy voucher code already used' });
+			}
+
+			let newUser = await createUser({
 				name,
 				password,
 				email,
-				balance,
+				balance: getVoucher.amount,
 				bedrooms,
 				address,
 				propertyType
 			});
 			await setPassword(newUser);
 			await saveUser(newUser);
-			res.json(newUser);
+
+			newUser = await useVoucher(
+				newUser._id,
+				voucher as Pick<VoucherInterface, 'code'>
+			);
+
+			res.json({ newUser, voucher: getVoucher });
 			return next();
 		}
 

@@ -1,18 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
-
-enum PaymentStatusType {
-	PENDING = 'pending',
-	PAID = 'paid'
-}
-
-interface ReadingInterface extends Document {
-	customer: Schema.Types.ObjectId;
-	dayReading: number;
-	nightReading: number;
-	gasReading: number;
-	paymentStatus: PaymentStatusType;
-	makePayment(): void;
-}
+import ReadingInterface, {
+	PaymentStatusType
+} from '../types/Reading.interface';
 
 const ReadingSchema = new Schema<ReadingInterface>(
 	{
@@ -46,5 +35,3 @@ ReadingSchema.methods.makePayment = function () {
 };
 
 export default model<ReadingInterface>('Reading', ReadingSchema);
-
-export { PaymentStatusType, ReadingInterface };

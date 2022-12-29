@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
+import RequestInterface from '../types/Request.interface';
 
-export default (req: any, res: Response, next: NextFunction) => {
+export default (req: RequestInterface, res: Response, next: NextFunction) => {
 	const authHeader = req.headers.authorization;
 	const token = authHeader && authHeader.split(' ')[1];
 	if (token == null) {

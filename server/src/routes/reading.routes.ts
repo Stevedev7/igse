@@ -4,11 +4,12 @@ import {
 	readingGetAll
 } from '../controllers/reading.controller';
 
-import authenticateToken from '../middlewares/authenticateToken';
-
 const router = Router();
 
-router.get('/', authenticateToken, readingGetAll);
-router.post('/new', authenticateToken, postNewReading);
+// Route -> /user/reading
+router.get('/', readingGetAll);
+
+// Route -> /user/reading/new
+router.post('/new', postNewReading);
 
 export default router;
