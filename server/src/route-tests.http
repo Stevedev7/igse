@@ -31,19 +31,19 @@ POST http://localhost:8000/user/login HTTP/1.1
 Content-Type: application/json
 
 {
-     "email": "naruto_uzumaki@gmail.com",
+     "email": "pinto_steve@yahoo.com",
      "password": "password"
 
 }
 
 ###
 
-POST http://localhost:8000/user/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkODhiZGZlNjk2ZTkxMjJiOTU2ZjMiLCJlbWFpbCI6Im5hcnV0b191enVtYWtpQGdtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzIzMTcxMjYsImV4cCI6MTY3MjMxODkyNn0.bN4V6CpxjJDJGU6CEsjw_j7x-huf7NJdfxY3uBIhOk8
+POST http://localhost:8000/user/topup HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkOGI0MzVhYmUxMjFhMTMzOTc5NzciLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzIzMTc3ODIsImV4cCI6MTY3MjMxOTU4Mn0.w0-G2IU_1w94xMH7q53v5LyYGWZneq1_qIfCAK0IOW8
 Content-Type: application/json
 
 {
-     "code": "QRSTUVWx"
+     "code": "32D10C6E"
 
 }
 ### LogOut User
@@ -80,6 +80,11 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:8000/igse/admin/tariff HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkOGUzNDY1MjhjMzZjMTdkMWE5YTciLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzE4NTQwLCJleHAiOjE2NzIzMjAzNDB9.QstkHF3nm9IHOXNKsEBhRnCQvgfnxSDmm0VwLrSynHI
+
+###
+
 GET http://localhost:8000/igse/admin/voucher HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkODZlZmQwMjZhMjM4YmJjOGRhYzgiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzE2NzMwLCJleHAiOjE2NzIzMTg1MzB9.Z4hcN6LhVENjZ1ppoxHjMnyqlpl1W3mz1QG5-8M1fS8
 ###

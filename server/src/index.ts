@@ -10,6 +10,7 @@ import igseRoutes from './routes/igse.routes';
 
 import { initDB } from './init/db';
 import seed from './init/seed.db';
+import initTariff from './init/tariff.init';
 
 config();
 
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 8000;
 const app: Application = express();
 
 initDB();
+initTariff();
 seed();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

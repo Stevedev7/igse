@@ -1,18 +1,20 @@
 import { Document, model, Schema } from 'mongoose';
-
-interface TariffInterface extends Document {
-	tarrifType: string;
-	rate: number;
-}
+import TariffInterface, { Tariff } from '../types/Tariff.interface';
 
 const TariffSchema = new Schema<TariffInterface>({
-	_id: {
+	tarrifType: {
 		type: String,
-		alias: 'tarrifType'
+		required: true,
+		unique: true,
+		enum: Tariff
 	},
 	rate: {
 		type: Number,
-		default: null
+		required: true
+	},
+	unit: {
+		type: String,
+		required: true
 	}
 });
 
