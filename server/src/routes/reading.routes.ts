@@ -6,10 +6,10 @@ import {
 
 const router = Router();
 
-// Route -> /user/reading
+// Route ->GET /user/reading
 router.get('/', readingGetAll);
 
-// Route -> /user/reading/new
+// Route ->POST /user/reading/new
 router.post('/new', postNewReading);
 
 export default router;

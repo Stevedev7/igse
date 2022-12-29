@@ -1,6 +1,10 @@
 import { Router } from 'express';
 import { loginUser, logoutUser } from '../controllers/auth.controller';
-import { postUser, getUsers } from '../controllers/user.controller';
+import {
+	postUser,
+	getUsers,
+	topUpBalance
+} from '../controllers/user.controller';
 import authenticateToken from '../middlewares/authenticateToken';
 import readingRoutes from './reading.routes';
 
@@ -17,6 +21,9 @@ router.get('/', getUsers);
 
 // Route -> /user/logout
 router.post('/logout', logoutUser);
+
+//Route -> /user/topup
+router.post('/topup', authenticateToken, topUpBalance);
 
 // Routes -> /user/reading/*
 router.use('/reading', authenticateToken, readingRoutes);

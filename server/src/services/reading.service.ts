@@ -37,4 +37,7 @@ export const setPaymentStatus = async (readingId: string) => {
 	});
 };
 
-export default { createReading, setPaymentStatus };
+export const findReadingById = async (id: Schema.Types.ObjectId) =>
+	await Reading.findById(id);
+
+export default { createReading, setPaymentStatus, findReadingById };

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { createReading } from '../services/reading.service';
 import {
 	createUser,
 	findAllUsers,
@@ -12,6 +13,7 @@ import {
 	findVoucher,
 	saveVoucher
 } from '../services/voucher.service';
+import RequestInterface from '../types/Request.interface';
 import VoucherInterface from '../types/Voucher.interface';
 import { validateRegistrationInput } from '../validations/user.validation';
 import { validateVoucherRedeemInput } from '../validations/voucher.validation';
@@ -76,8 +78,19 @@ export const postUser = async (
 				voucher as Pick<VoucherInterface, 'code'>
 			);
 
-			res.json({ newUser, voucher: getVoucher });
-			return next();
+			const reading = await createReading(
+				{
+					customer: newUser._id,
+					dayReading: 0,
+					gasReading: 0,
+					nightReading: 0
+				},
+				newUser._id
+			);
+
+			reading.save();
+
+			return res.json({ newUser });
 		}
 
 		throw new Error('User Exists');
@@ -88,21 +101,48 @@ export const postUser = async (
 	}
 };
 
-export const getUsers = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
+export const getUsers = async (req: RequestInterface, res: Response) => {
 	try {
 		const allUsers = await findAllUsers();
 		res.json(allUsers);
 	} catch (err) {
 		res.json(err);
-		console.log(err);
 	}
+};
+
+export const topUpBalance = async (req: RequestInterface, res: Response) => {
+	const { code } = req.body;
+
+	const voucherError = validateVoucherRedeemInput({
+		code
+	}).error;
+	if (voucherError) {
+		throw new Error(voucherError.details[0].message);
+	}
+	const getVoucher = await findVoucher(code);
+
+	if (getVoucher === null) {
+		return res
+			.status(404)
+			.json({ error: 'Enter a valid energy voucher code' });
+	}
+
+	if (getVoucher.used) {
+		return res
+			.status(400)
+			.json({ error: 'Energy voucher code already used' });
+	}
+
+	const user = await findUser('email', req.user.email);
+	await useVoucher(user._id, code);
+	user.balance += getVoucher.amount;
+
+	await user.save();
+	res.json('Topped up');
 };
 
 export default {
 	postUser,
-	getUsers
+	getUsers,
+	topUpBalance
 };
