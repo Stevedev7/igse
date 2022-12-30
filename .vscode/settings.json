@@ -1,4 +1,6 @@
 {
 	"editor.formatOnSave": true,
-	"editor.defaultFormatter": "esbenp.prettier-vscode"
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"recommendations": ["Vue.volar", "Vue.vscode-typescript-vue-plugin"],
+	"git.ignoreLimitWarning": true
 }
