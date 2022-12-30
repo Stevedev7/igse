@@ -11,7 +11,9 @@ interface ReadingInterface extends Document {
 	nightReading: number;
 	gasReading: number;
 	paymentStatus: PaymentStatusType;
+	bill: number;
 	makePayment(): void;
+	createdAt: Date;
 }
 
 export default ReadingInterface;

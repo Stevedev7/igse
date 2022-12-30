@@ -1,3 +1,4 @@
+import { format } from 'date-and-time';
 import { Schema } from 'mongoose';
 import Reading from '../models/reading.model';
 import { PaymentStatusType } from '../types/Reading.interface';
@@ -9,7 +10,9 @@ export const createReading = async (
 		dayReading,
 		nightReading,
 		gasReading,
-		customer
+		customer,
+		bill,
+		date
 	}: {
 		dayReading: number;
 		nightReading: number;
@@ -17,6 +20,8 @@ export const createReading = async (
 		customer: {
 			_id: Schema.Types.ObjectId;
 		};
+		bill: number;
+		date: string;
 	},
 	user: UserInterface
 ) => {
@@ -24,7 +29,9 @@ export const createReading = async (
 		dayReading,
 		nightReading,
 		gasReading,
-		customer
+		customer,
+		bill,
+		createdAt: new Date(format(new Date(date), 'YYYY-MM-DD'))
 	});
 	const updatedUser = await addReading(user._id, reading._id);
 	await saveUser(updatedUser);
@@ -32,11 +39,10 @@ export const createReading = async (
 };
 
 export const setPaymentStatus = async (readingId: string) => {
-	return await Reading.findByIdAndUpdate(readingId, {
-		paymentStatus: PaymentStatusType.PAID
-	});
+	const reading = await Reading.findById(readingId);
+	reading.paymentStatus = PaymentStatusType.PAID;
+	await reading.save();
 };
-
 export const findReadingById = async (id: Schema.Types.ObjectId) =>
 	await Reading.findById(id);
 

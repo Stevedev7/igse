@@ -1,5 +1,6 @@
+import { format, subtract } from 'date-and-time';
 import { NextFunction, Request, Response } from 'express';
-import { createReading } from '../services/reading.service';
+import { createReading, setPaymentStatus } from '../services/reading.service';
 import {
 	createUser,
 	findAllUsers,
@@ -77,19 +78,22 @@ export const postUser = async (
 				newUser._id,
 				voucher as Pick<VoucherInterface, 'code'>
 			);
+			const date = format(new Date(Date.now()), 'YYYY-MM-DD');
 
 			const reading = await createReading(
 				{
 					customer: newUser._id,
 					dayReading: 0,
 					gasReading: 0,
-					nightReading: 0
+					nightReading: 0,
+					bill: 0,
+					date
 				},
 				newUser._id
 			);
 
-			reading.save();
-
+			await reading.save();
+			await setPaymentStatus(reading._id);
 			return res.json({ newUser });
 		}
 

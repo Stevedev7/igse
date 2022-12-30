@@ -6,6 +6,10 @@ import {
 } from '../services/reading.service';
 import { findUser, findUserById } from '../services/user.service';
 import RequestInterface from '../types/Request.interface';
+import Tariff from '../models/tariff.model';
+import { Tariff as TariffEnum } from '../types/Tariff.interface';
+import { validateReadings } from '../validations/reading.validate';
+import { format, subtract } from 'date-and-time';
 
 const readingGetAll = async (
 	req: RequestInterface,
@@ -44,21 +48,71 @@ const postNewReading = async (
 	const { dayReading, nightReading, gasReading } = req.body;
 	try {
 		const user = await findUser('email', req.user.email);
+
+		const latest = await findReadingById(
+			user.readings[user.readings.length - 1]
+		);
+
+		if (
+			!validateReadings(
+				{
+					day: dayReading,
+					night: nightReading,
+					gas: gasReading
+				},
+				latest
+			)
+		) {
+			throw new Error(
+				'Invalid readings. Please enter readings that are more than previous readings.'
+			);
+		}
+
+		const dayTariff = await Tariff.findOne({ tarrifType: TariffEnum.day });
+		const nightTariff = await Tariff.findOne({
+			tarrifType: TariffEnum.night
+		});
+		const standingTariff = await Tariff.findOne({
+			tarrifType: TariffEnum.standing
+		});
+		const gasTariff = await Tariff.findOne({ tarrifType: TariffEnum.gas });
+		const date =
+			req.body.date || format(new Date(Date.now()), 'YYYY-MM-DD');
+		const numberOfDays = subtract(
+			new Date(date),
+			latest.createdAt
+		).toDays();
+
+		if (numberOfDays <= 0) {
+			throw new Error(
+				'Invalid date. Date cannot be earlier than the previous reading.'
+			);
+		}
+
+		const bill =
+			(dayReading - latest.dayReading) * dayTariff.rate +
+			(nightReading - latest.nightReading) * nightTariff.rate +
+			(gasReading - latest.gasReading) * gasTariff.rate;
 		const reading = await createReading(
 			{
 				customer: user._id,
 				dayReading,
 				nightReading,
-				gasReading
+				gasReading,
+				bill,
+				date
 			},
 			user
 		);
 
 		await reading.save();
-		res.json({ message: 'New Reading created.', reading });
-	} catch (e) {
-		console.log(e);
-		res.status(400).json("Something's wrong");
+		res.json({
+			message: 'New Reading created.',
+			reading,
+			numberOfDays
+		});
+	} catch ({ message }) {
+		res.status(400).json({ error: message });
 	}
 };
 

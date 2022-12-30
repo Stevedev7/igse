@@ -235,19 +235,18 @@ const seed = async () => {
 		await newUser.save();
 		console.log(`User: ${newUser.email} saved.`);
 
-		if (
-			newUser.email !== 'test@gmail.com' &&
-			newUser.email !== 'gse@shangrila.gov.un'
-		) {
-			for (let i = 0; i < nuberOfReadings; i++) {
-				let newReading = await createReading(
-					{ ...generateReadings(), customer: newUser._id },
-					newUser
-				);
-				await newReading.save();
-				console.log(`Reading: ${newReading._id} created.`);
-			}
-		}
+		let newReading = await createReading(
+			{
+				dayReading: 0,
+				nightReading: 0,
+				gasReading: 0,
+				customer: newUser._id,
+				bill: 0,
+				date: '2022-12-25'
+			},
+			newUser
+		);
+		await newReading.save();
 	});
 };
 

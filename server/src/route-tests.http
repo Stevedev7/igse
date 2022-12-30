@@ -19,7 +19,7 @@ Content-Type: application/json
           "city": "Leicester",
           "postCode": "LE27GU"
      },
-      "voucher": "XTX2GZAD"
+      "voucher": "1DD33478"
 }
 
 ###
@@ -39,7 +39,7 @@ Content-Type: application/json
 ###
 
 POST http://localhost:8000/user/topup HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkOGI0MzVhYmUxMjFhMTMzOTc5NzciLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzIzMTc3ODIsImV4cCI6MTY3MjMxOTU4Mn0.w0-G2IU_1w94xMH7q53v5LyYGWZneq1_qIfCAK0IOW8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkYjRjODQ5MDYwN2EwMDllODQyOTgiLCJlbWFpbCI6Im5hcnV0b191enVtYWtpQGdtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzIzMjg1OTIsImV4cCI6MTY3MjMzMDM5Mn0.8QkJ7o2xTncmx9sAWMm73P4BuwqL71_gbXSTEBgsrYE
 Content-Type: application/json
 
 {
@@ -52,16 +52,17 @@ POST http://localhost:8000/user/logout HTTP/1.1
 
 ###
 GET http://localhost:8000/user/reading HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkODhiZGZlNjk2ZTkxMjJiOTU2ZjMiLCJlbWFpbCI6Im5hcnV0b191enVtYWtpQGdtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzIzMTcxMjYsImV4cCI6MTY3MjMxODkyNn0.bN4V6CpxjJDJGU6CEsjw_j7x-huf7NJdfxY3uBIhOk8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FlY2Y2MjBkOTJhNTA5YjI4NDdhYjIiLCJlbWFpbCI6Im5hcnV0b191enVtYWtpQGdtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzI0MDA3OTAsImV4cCI6MTY3MjQwMjU5MH0.kFqYJnU1vKMoicShQ4kG_Y3AOsV6fy9wUr_2OPzT0yU
 ###
 POST http://localhost:8000/user/reading/new HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkODFlYTc4MDVjNmRiZmVlZDQxNzYiLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzIzMTUzODEsImV4cCI6MTY3MjMxNzE4MX0.MXp0uZp9OG5kGoXE2TRVExPyUYXnkTsKMzvA5ws7KxI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FlYzliMmNhY2E5YzkwMWVlZjhiNTciLCJlbWFpbCI6InBpbnRvX3N0ZXZlQHlhaG9vLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzIzOTkyOTUsImV4cCI6MTY3MjQwMTA5NX0.sMjJY1KJzM7Qw2dfX_prqS5abv20264bgZ6rfIxOAWk
 Content-Type: application/json
 
 {
-     "dayReading": 100,
-	"nightReading": 69,
-	"gasReading": 420
+     "dayReading": 1000,
+	"nightReading": 1000,
+	"gasReading": 1000,
+     "date": "2023-1-30"
 }
 
 ### Open API
@@ -81,15 +82,24 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8000/igse/admin/tariff HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkOGUzNDY1MjhjMzZjMTdkMWE5YTciLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzE4NTQwLCJleHAiOjE2NzIzMjAzNDB9.QstkHF3nm9IHOXNKsEBhRnCQvgfnxSDmm0VwLrSynHI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkYmQ3M2UzMmZkMzYxM2RlMjI4NzEiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzMwNjIxLCJleHAiOjE2NzIzMzI0MjF9.r4HlDZBGKCI6e0o0kTuOycKAkto2-8xN7yUaUvqccLk
+
+### 
+POST http://localhost:8000/igse/admin/tariff/update/standing HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkYmQ3M2UzMmZkMzYxM2RlMjI4NzEiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzMwNjIxLCJleHAiOjE2NzIzMzI0MjF9.r4HlDZBGKCI6e0o0kTuOycKAkto2-8xN7yUaUvqccLk
+Content-Type: application/json
+
+{
+     "rate": 3.6
+}
 
 ###
 
 GET http://localhost:8000/igse/admin/voucher HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkODZlZmQwMjZhMjM4YmJjOGRhYzgiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzE2NzMwLCJleHAiOjE2NzIzMTg1MzB9.Z4hcN6LhVENjZ1ppoxHjMnyqlpl1W3mz1QG5-8M1fS8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkYjRhZTQ5MDYwN2EwMDllODQyNDEiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzI4NDMzLCJleHAiOjE2NzIzMzAyMzN9.LTwhvbm_PcQPFmNXC2AIKqQ3Cqnv3uNJAnj16Q15uPE
 ###
 POST http://localhost:8000/igse/admin/voucher/new HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkNzY4OTg3OGE0OTg5MmI5NWE3NjciLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzEyNDc4LCJleHAiOjE2NzIzMTQyNzh9.AW7CnBiRv-bBbsMSVFCTYaYjglcDW1dwHUZjzhXQBKk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkYjRhZTQ5MDYwN2EwMDllODQyNDEiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzI4NDk2LCJleHAiOjE2NzIzMzAyOTZ9.BoecB2PtobIxnbp6dFJG8Sl8PzDYp1MFicGDXUKPJ1U
 Content-Type: application/json
 
 {
@@ -99,4 +109,18 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8000/igse/admin/voucher/XTX2GZAD HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FjOGM0YjY1OGMyMWMwMTRiOWYxNzQiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMjUyNTM5LCJleHAiOjE2NzIyNTQzMzl9.j-8D1ZIzQnCwf5-v3lkX_EcMZE5nFu58r9uYbNigVH0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkYmQ3M2UzMmZkMzYxM2RlMjI4NzEiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzMwNjIxLCJleHAiOjE2NzIzMzI0MjF9.r4HlDZBGKCI6e0o0kTuOycKAkto2-8xN7yUaUvqccLk
+
+
+
+
+
+### Login New User
+POST http://localhost:8000/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+     "email": "naruto_uzumaki@gmail.com",
+     "password": "password"
+
+}
