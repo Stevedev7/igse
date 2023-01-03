@@ -3,6 +3,7 @@ import swaggerUi from 'swagger-ui-express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import { config } from 'dotenv';
+import cors from 'cors';
 
 import routes from './routes';
 import userRoutes from './routes/user.routes';
@@ -25,6 +26,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('tiny'));
 app.use(express.static('public'));
+app.use(
+	cors({
+		origin: '*'
+	})
+);
 app.use(
 	'/docs',
 	swaggerUi.serve,
