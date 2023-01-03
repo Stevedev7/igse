@@ -1,0 +1,27 @@
+.form-group {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.form-group h3 {
+	margin: 1.5rem 0 0;
+	color: #465760;
+}
+
+select {
+	min-width: 60%;
+	padding: 0 0 0 0.5rem;
+	font-size: 15px;
+	font-weight: 500;
+	background-color: #f4f3f3;
+	border: none;
+	border-radius: 5px;
+	height: 2rem;
+	color: #475860;
+}
+
+select:focus {
+	border: none;
+}

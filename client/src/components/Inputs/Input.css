@@ -1,0 +1,30 @@
+div.input {
+	min-width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	margin: 1rem 0;
+}
+
+div.label {
+	min-width: 20%;
+	align-self: flex-start;
+	margin: 0 0 0.5rem 20%;
+	font-size: 18px;
+	font-weight: 700;
+	font-family: sans-serif;
+	color: #475860;
+}
+
+div.input input {
+	min-width: 60%;
+	height: 2rem;
+	border-radius: 5px;
+	font-size: 15px;
+	padding: 0 0 0 0.5rem;
+}
+
+div.input input:focus {
+	outline: none;
+}

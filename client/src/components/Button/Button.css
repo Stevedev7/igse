@@ -1,0 +1,26 @@
+button {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.form-submit {
+	background-color: #b3ddf3;
+	width: 10rem;
+	height: 2rem;
+	margin: 2rem 0 0;
+	color: #475860;
+	font-size: 18px;
+	border: none;
+	box-shadow: 2px 2px 5px #475860;
+}
+
+button:active {
+	top: 2px;
+}
+
+button.form-submit:hover {
+	background-color: #a1bfce;
+}

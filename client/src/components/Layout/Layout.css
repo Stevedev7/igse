@@ -1,0 +1,29 @@
+div.page-layout {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	min-height: calc((100vh) - 2.4rem);
+	flex-direction: column;
+	width: 75%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 1.1rem 0 0 0;
+}
+
+.page-layout .header {
+	height: 10rem;
+	width: 75%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.page-layout .children {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 75%;
+	overflow-y: scroll;
+}
