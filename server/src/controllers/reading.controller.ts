@@ -64,7 +64,10 @@ const postNewReading = async (
 			)
 		) {
 			throw new Error(
-				'Invalid readings. Please enter readings that are more than previous readings.'
+				`Invalid readings. Please enter readings that are more than previous readings.
+				Day Reading: 	${latest.dayReading}
+				Night Reading: 	${latest.nightReading}
+				Gas Reading: 	${latest.gasReading}`
 			);
 		}
 
@@ -85,7 +88,10 @@ const postNewReading = async (
 
 		if (numberOfDays <= 0) {
 			throw new Error(
-				'Invalid date. Date cannot be earlier than the previous reading.'
+				`Invalid date. Date cannot be earlier than the previous reading(${format(
+					latest.createdAt,
+					'YYYY-MM-DD'
+				)}).`
 			);
 		}
 

@@ -9,19 +9,16 @@ import {
 
 const router = Router();
 
-// Route -> /igse/admin/tariff/
-router.get('/', getTariff);
-
 // Route -> /igse/admin/tariff/update/day
-router.post('/update/day', updateDayTariff);
+router.put('/update/day', updateDayTariff);
 
 // Route -> /igse/admin/tariff/night
-router.post('/update/night', updateNightTariff);
+router.put('/update/night', updateNightTariff);
 
 // Route -> /igse/admin/tariff/update/gas
-router.post('/update/gas', updateGasTariff);
+router.put('/update/gas', updateGasTariff);
 
 // Route -> /igse/admin/tariff/update/standing
-router.post('/update/standing', updateStandingTariff);
+router.put('/update/standing', updateStandingTariff);
 
 export default router;

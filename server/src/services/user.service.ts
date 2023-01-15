@@ -77,10 +77,12 @@ export const useVoucher = async (
 	user.addVoucher(code);
 	const voucher = await findVoucher(code);
 	await (
-		await voucherModel.findOneAndUpdate({ code }, { $set: { used: true } })
+		await voucherModel.findOneAndUpdate(
+			{ code },
+			{ $set: { used: true, user: user._id } }
+		)
 	).save();
 	await saveUser(user);
-
 	return user;
 };
 

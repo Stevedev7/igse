@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Form from "../../components/Form";
 import Input from "../../components/Inputs/Input";
 import Layout from "../../components/Layout";
+
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
@@ -20,6 +22,8 @@ const RegisterPage = () => {
 	const [voucher, setVoucher] = useState("");
 	const [bedrooms, setBedrooms] = useState(0);
 	const [propertyType, setPropertyType] = useState("detached");
+
+	const navigate = useNavigate();
 
 	const URI = "http://localhost:8000";
 
@@ -48,7 +52,7 @@ const RegisterPage = () => {
 		}
 
 		if (secondLine !== "") {
-			payload.address["secondLine"] = middleName;
+			payload.address["secondLine"] = secondLine;
 		}
 
 		console.log(payload);
@@ -59,7 +63,9 @@ const RegisterPage = () => {
 				},
 			})
 			.then((res) => {
-				console.log(res.data);
+				setInterval(() => {
+					navigate("/login");
+				}, 1000);
 			})
 			.catch((e) => alert(e.response.data.error));
 	};

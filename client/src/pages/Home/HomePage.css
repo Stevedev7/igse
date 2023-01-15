@@ -1,0 +1,24 @@
+.tariffs {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.tariffs h3 {
+	margin-top: 1rem;
+}
+
+h2 {
+	text-align: center;
+}
+
+.tariffs div {
+	display: flex;
+	justify-content: space-evenly;
+	min-width: 100%;
+}
+
+.tariffs div a {
+	margin-top: 1rem;
+}

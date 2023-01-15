@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
-import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
+import { NextFunction, Response } from 'express';
+import jwt, { Secret } from 'jsonwebtoken';
 import RequestInterface from '../types/Request.interface';
 
 export default (req: RequestInterface, res: Response, next: NextFunction) => {

@@ -19,7 +19,7 @@ Content-Type: application/json
           "city": "Leicester",
           "postCode": "LE27GU"
      },
-      "voucher": "1DD33478"
+      "voucher": "72B432BD"
 }
 
 ###
@@ -79,14 +79,9 @@ Content-Type: application/json
      "password": "gse@energy"
 
 }
-
-###
-GET http://localhost:8000/igse/admin/tariff HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkYmQ3M2UzMmZkMzYxM2RlMjI4NzEiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzMwNjIxLCJleHAiOjE2NzIzMzI0MjF9.r4HlDZBGKCI6e0o0kTuOycKAkto2-8xN7yUaUvqccLk
-
 ### 
-POST http://localhost:8000/igse/admin/tariff/update/standing HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2FkYmQ3M2UzMmZkMzYxM2RlMjI4NzEiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyMzMwNjIxLCJleHAiOjE2NzIzMzI0MjF9.r4HlDZBGKCI6e0o0kTuOycKAkto2-8xN7yUaUvqccLk
+PUT  http://localhost:8000/igse/admin/tariff/update/standing HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2I5NzdjMmM2ZTU1NTNjYTM3ZGQ3ZjciLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjczMDk5MjEzLCJleHAiOjE2NzMxMDEwMTN9.DN2s0NasL14jjWrBTPzUTOrunhRPn0hCA2k3cj7QXBo
 Content-Type: application/json
 
 {
@@ -124,3 +119,11 @@ Content-Type: application/json
      "password": "password"
 
 }
+
+###
+
+GET http://localhost:8000/user HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2I0YTgzM2E3NDY1MGY1Yzc5ZmYwNzIiLCJlbWFpbCI6ImdzZUBzaGFuZ3JpbGEuZ292LnVuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjcyNzgzOTUzLCJleHAiOjE2NzI3ODU3NTN9.ePq1yoF96v0h3-diOIZUzoGa67MbJbrPHkQear93s14
+
+###
+GET http://localhost:8000/igse/tariff HTTP/1.1

@@ -14,14 +14,6 @@ const generateRandomNumber = (
 	);
 };
 
-const generateReadings = () => {
-	return {
-		dayReading: generateRandomNumber(100, 500),
-		nightReading: generateRandomNumber(100, 500),
-		gasReading: generateRandomNumber(1000, 5000)
-	};
-};
-
 const properties = [
 	'detached',
 	'semi-detached',

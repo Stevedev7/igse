@@ -1,8 +1,5 @@
 button {
 	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	text-align: center;
 }
 
@@ -15,6 +12,9 @@ button {
 	font-size: 18px;
 	border: none;
 	box-shadow: 2px 2px 5px #475860;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 button:active {
@@ -23,4 +23,9 @@ button:active {
 
 button.form-submit:hover {
 	background-color: #a1bfce;
+}
+
+button.dashboard-btn {
+	margin: 20px 0 0;
+	background-color: chocolate;
 }

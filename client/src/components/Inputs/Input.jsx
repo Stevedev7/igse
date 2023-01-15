@@ -4,7 +4,7 @@ import "./Input.css";
 const Input = ({ id, type, onChange }) => {
 	return (
 		<div className="input">
-			{type === "text" || "password" || "number" ? (
+			{type === "text" || "password" || "number" || "date" ? (
 				<StyledInput
 					type={type}
 					id={id}

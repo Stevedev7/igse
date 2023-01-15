@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { loginUser, logoutUser } from '../controllers/auth.controller';
 import {
 	postUser,
-	getUsers,
+	getUser,
 	topUpBalance
 } from '../controllers/user.controller';
 import authenticateToken from '../middlewares/authenticateToken';
@@ -17,7 +17,7 @@ router.post('/register', postUser);
 router.post('/login', loginUser);
 
 // Route -> /user/
-router.get('/', getUsers);
+router.get('/', authenticateToken, getUser);
 
 // Route -> /user/logout
 router.post('/logout', logoutUser);

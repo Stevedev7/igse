@@ -1,4 +1,6 @@
 import { Router, Request, Response } from 'express';
+import authenticateToken from '../middlewares/authenticateToken';
+import RequestInterface from '../types/Request.interface';
 
 const router = Router();
 
@@ -7,5 +9,13 @@ router.get('/', (req: Request, res: Response) => {
 		message: 'Hello World'
 	});
 });
+
+router.get(
+	'/token',
+	authenticateToken,
+	(req: RequestInterface, res: Response) => {
+		res.json(req.user);
+	}
+);
 
 export default router;

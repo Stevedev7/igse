@@ -4,26 +4,15 @@ import axios from "axios";
 import Form from "../../components/Form";
 import Input from "../../components/Inputs/Input";
 import Layout from "../../components/Layout";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const URI = "http://localhost:8000";axios
-			.post(
-				`${URI}/user/login`,
-				{
-					email,
-					password,
-				},
-				{
-					headers: {
-						"Content-Type": "application/json",
-					},
-				}
-			)
-			.then((res) => res.data)
-			.then(({ accessToken }) => localStorage.setItem("token", accessToken))
-			.catch((e) => alert(e.response.data.error));
+
+	const navigate = useNavigate();
+
+	const URI = "http://localhost:8000";
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -42,6 +31,7 @@ const LoginPage = () => {
 			)
 			.then((res) => res.data)
 			.then(({ accessToken }) => localStorage.setItem("token", accessToken))
+			.then(() => navigate("/dashboard"))
 			.catch((e) => alert(e.response.data.error));
 	};
 	return (

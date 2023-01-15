@@ -145,8 +145,21 @@ export const topUpBalance = async (req: RequestInterface, res: Response) => {
 	res.json('Topped up');
 };
 
+export const getUser = async (req: RequestInterface, res: Response) => {
+	try {
+		const user = await findUser('email', req.user.email);
+		if (!user) {
+			throw new Error('User not found');
+		}
+		res.json(user);
+	} catch ({ message }) {
+		res.status(404).json({ error: message });
+	}
+};
+
 export default {
 	postUser,
 	getUsers,
-	topUpBalance
+	topUpBalance,
+	getUser
 };

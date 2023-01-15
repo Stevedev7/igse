@@ -10,7 +10,7 @@ export enum Tariff {
 	day = 'Day',
 	night = 'Night',
 	gas = 'Gas',
-	standing = 'Standing Charge'
+	standing = 'Standing'
 }
 
 export enum Unit {
