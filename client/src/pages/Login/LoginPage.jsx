@@ -5,14 +5,13 @@ import Form from "../../components/Form";
 import Input from "../../components/Inputs/Input";
 import Layout from "../../components/Layout";
 import { useNavigate } from "react-router-dom";
+import URI from "../../constants";
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const navigate = useNavigate();
-
-	const URI = "http://localhost:8000";
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -31,7 +30,7 @@ const LoginPage = () => {
 			)
 			.then((res) => res.data)
 			.then(({ accessToken }) => localStorage.setItem("token", accessToken))
-			.then(() => navigate("/dashboard"))
+			.then(() => navigate("/admin"))
 			.catch((e) => alert(e.response.data.error));
 	};
 	return (

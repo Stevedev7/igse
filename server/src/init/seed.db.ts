@@ -51,125 +51,6 @@ const vouchers = new Set([
 
 const users = [
 	{
-		email: 'michael.lawson@reqres.in',
-		password: 'password',
-		confirm: 'password',
-		name: {
-			firstName: 'Michael',
-			lastName: 'Lawson'
-		},
-		address: {
-			firstLine: 'The Cross',
-			secondLine: '8',
-			city: 'Cheshire',
-			postCode: 'CH64 9UB'
-		},
-		bedrooms: generateRandomNumber(1, 10),
-		propertyType: properties[generateRandomNumber(0, 7)]
-	},
-	{
-		email: 'lindsay.ferguson@reqres.in',
-		password: 'password',
-		confirm: 'password',
-		name: {
-			firstName: 'Lindsay',
-			lastName: 'Ferguson'
-		},
-		address: {
-			firstLine: '69',
-			secondLine: 'Albion St',
-			city: 'Glasgow',
-			postCode: 'G1 1PA'
-		},
-		bedrooms: generateRandomNumber(1, 10),
-		propertyType: properties[generateRandomNumber(0, 7)]
-	},
-	{
-		email: 'tobias.funke@reqres.in',
-		password: 'password',
-		confirm: 'password',
-		name: {
-			firstName: 'Tobias',
-			lastName: 'Funke'
-		},
-		address: {
-			firstLine: '3',
-			secondLine: 'Whitecroft Way',
-			city: 'Beckenham',
-			postCode: 'BR3 3AQ'
-		},
-		bedrooms: generateRandomNumber(1, 10),
-		propertyType: properties[generateRandomNumber(0, 7)]
-	},
-	{
-		email: 'byron.fields@reqres.in',
-		password: 'password',
-		confirm: 'password',
-		name: {
-			firstName: 'Byron',
-			lastName: 'Fields'
-		},
-		address: {
-			firstLine: '32 St',
-			secondLine: 'Andrews Crescent',
-			city: 'Glasgow',
-			postCode: 'G41 1PF'
-		},
-		bedrooms: generateRandomNumber(1, 10),
-		propertyType: properties[generateRandomNumber(0, 7)]
-	},
-	{
-		email: 'george.edwards@reqres.in',
-		password: 'password',
-		confirm: 'password',
-		name: {
-			firstName: 'George',
-			lastName: 'Edwards'
-		},
-		address: {
-			firstLine: '1',
-			secondLine: ' King William St',
-			city: 'Coventry',
-			postCode: 'CV1 5JD'
-		},
-		bedrooms: generateRandomNumber(1, 10),
-		propertyType: properties[generateRandomNumber(0, 7)]
-	},
-	{
-		email: 'rachel.howell@reqres.in',
-		password: 'password',
-		confirm: 'password',
-		name: {
-			firstName: 'Rachel',
-			lastName: 'Howell'
-		},
-		address: {
-			firstLine: '23 Leicester Rd',
-			city: 'Loughborough',
-			postCode: 'LE11 2AE'
-		},
-		bedrooms: generateRandomNumber(1, 10),
-		propertyType: properties[generateRandomNumber(0, 7)]
-	},
-	{
-		email: 'pinto_steve@yahoo.com',
-		password: 'password',
-		confirm: 'password',
-		name: {
-			firstName: 'Brian',
-			middleName: 'Steve',
-			lastName: 'Pinto'
-		},
-		bedrooms: 6,
-		propertyType: 'flat',
-		address: {
-			firstLine: 'Flat 3 Jayhouse',
-			secondLine: '88-90 London Road',
-			city: 'Leicester',
-			postCode: 'LE20RD'
-		}
-	},
-	{
 		email: 'gse@shangrila.gov.un',
 		password: 'gse@energy',
 		confirm: 'gse@energy',
@@ -234,7 +115,7 @@ const seed = async () => {
 				gasReading: 0,
 				customer: newUser._id,
 				bill: 0,
-				date: '2022-12-25'
+				date: '2022-11-01'
 			},
 			newUser
 		);

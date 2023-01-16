@@ -78,7 +78,7 @@ export const postUser = async (
 				newUser._id,
 				voucher as Pick<VoucherInterface, 'code'>
 			);
-			const date = format(new Date(Date.now()), 'YYYY-MM-DD');
+			const date = format(new Date('2022-11-01'), 'YYYY-MM-DD');
 
 			const reading = await createReading(
 				{

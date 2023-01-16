@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Topup from "./pages/Topup/Topup";
 import Reading from "./pages/Reading";
+import Admin from "./pages/Admin";
 function App() {
 	const URI = "http://localhost:8000";
 
@@ -17,7 +18,7 @@ function App() {
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 
-		if (token == null || token == "") {
+		if (token === null || token === "") {
 			setLoggedIn(false);
 		} else if (token) {
 			axios
@@ -27,7 +28,7 @@ function App() {
 					},
 				})
 				.then((res) =>
-					res.status == 200 ? setLoggedIn(true) : setLoggedIn(false)
+					res.status === 200 ? setLoggedIn(true) : setLoggedIn(false)
 				)
 				.catch((e) => setLoggedIn(false));
 		}
@@ -43,6 +44,7 @@ function App() {
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/user/topup" element={<Topup />} />
 					<Route path="/user/readings" element={<Reading />} />
+					<Route path="/admin" element={<Admin />} />
 					<Route path="*" element={<div>Not found</div>} />
 				</Routes>
 			</Router>

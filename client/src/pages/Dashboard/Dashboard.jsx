@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
+import Raeding from "../../components/Reading/Reading";
 import URI from "../../constants";
 
 import "./Dashboard.css";
@@ -9,6 +10,7 @@ import "./Dashboard.css";
 const Dashboard = () => {
 	const navigate = useNavigate();
 	const [user, setUser] = useState({});
+	const [readings, setReadings] = useState([]);
 
 	useEffect(() => {
 		const token = localStorage.getItem("token");
@@ -29,6 +31,15 @@ const Dashboard = () => {
 						})
 						.then((res) => {
 							setUser(res.data);
+						})
+						.then(() => {
+							axios
+								.get(`${URI}/user/reading`, {
+									headers: { Authorization: "Bearer " + token },
+								})
+								.then((res) => res.data)
+								.then((data) => setReadings(data.readings))
+								.catch((e) => console.log(e));
 						})
 						.catch((e) => console.log(e));
 				})
@@ -57,6 +68,11 @@ const Dashboard = () => {
 						<button onClick={(e) => navigate("/user/readings")}>
 							Readings
 						</button>
+					</div>
+					<div className="reading-container">
+						{readings.map((reading) => (
+							<Raeding bill={reading.bill} status={reading.paymentStatus} />
+						))}
 					</div>
 				</div>
 			</div>

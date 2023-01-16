@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express';
+import checkIfAdmin from '../middlewares/adminVerify';
 import authenticateToken from '../middlewares/authenticateToken';
 import RequestInterface from '../types/Request.interface';
 
@@ -13,6 +14,15 @@ router.get('/', (req: Request, res: Response) => {
 router.get(
 	'/token',
 	authenticateToken,
+	(req: RequestInterface, res: Response) => {
+		res.json(req.user);
+	}
+);
+
+router.get(
+	'/admin/verify',
+	authenticateToken,
+	checkIfAdmin,
 	(req: RequestInterface, res: Response) => {
 		res.json(req.user);
 	}
