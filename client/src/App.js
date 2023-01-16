@@ -10,6 +10,9 @@ import axios from "axios";
 import Topup from "./pages/Topup/Topup";
 import Reading from "./pages/Reading";
 import Admin from "./pages/Admin";
+import Voucher from "./pages/Voucher";
+import Tariff from "./pages/Tariff";
+
 function App() {
 	const URI = "http://localhost:8000";
 
@@ -45,6 +48,8 @@ function App() {
 					<Route path="/user/topup" element={<Topup />} />
 					<Route path="/user/readings" element={<Reading />} />
 					<Route path="/admin" element={<Admin />} />
+					<Route path="/admin/tariffs/set" element={<Tariff />} />
+					<Route path="/admin/vouchers/new" element={<Voucher />} />
 					<Route path="*" element={<div>Not found</div>} />
 				</Routes>
 			</Router>

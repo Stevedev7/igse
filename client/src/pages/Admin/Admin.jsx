@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import { Link, useNavigate } from "react-router-dom";
 import "./Admin.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import URI from "../../constants";
 import axios from "axios";
 const Admin = () => {
@@ -39,7 +39,7 @@ const Admin = () => {
 		<Layout header={"Admin"}>
 			<div className="admin-links">
 				<Link to="/admin/vouchers/new">Add Vouchers</Link>
-				<Link to="/admin/tariffs">Change Tariffs</Link>
+				<Link to="/admin/tariffs/set">Change Tariffs</Link>
 			</div>
 		</Layout>
 	);

@@ -1,1 +1,10 @@
+div.reading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
+div.reading span {
+	margin: 0 1rem;
+	margin-bottom: 0.5rem;
+}

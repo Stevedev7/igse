@@ -43,5 +43,6 @@ ul {
 	margin-top: 1rem;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 	min-width: 100%;
 }

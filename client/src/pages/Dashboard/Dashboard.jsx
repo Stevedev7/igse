@@ -71,7 +71,7 @@ const Dashboard = () => {
 					</div>
 					<div className="reading-container">
 						{readings.map((reading) => (
-							<Raeding bill={reading.bill} status={reading.paymentStatus} />
+							<Raeding reading={reading} />
 						))}
 					</div>
 				</div>

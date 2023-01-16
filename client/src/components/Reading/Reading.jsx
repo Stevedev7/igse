@@ -1,9 +1,14 @@
+import { Link, useParams } from "react-router-dom";
 import "./Reading.css";
 
-const Raeding = ({ bill, status }) => {
+const Raeding = ({ reading }) => {
+	const { id } = useParams();
 	return (
-		<div>
-			<span>{bill}</span> <span>{status}</span>
+		<div className="reading">
+			<span>£ {reading.bill}</span>{" "}
+			<span>
+				{reading.paymentStatus} <Link to={"#"}>Veiw</Link>
+			</span>
 		</div>
 	);
 };

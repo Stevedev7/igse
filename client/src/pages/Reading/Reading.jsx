@@ -56,7 +56,7 @@ const Reading = () => {
 		<Layout header="Readings">
 			<Form
 				buttonClassName={"form-submit"}
-				buttonText={"Topup"}
+				buttonText={"Add Reading"}
 				onSubmit={topUp}
 				header={"Create"}
 			>
